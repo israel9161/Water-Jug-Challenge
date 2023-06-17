@@ -43,6 +43,9 @@ def operaciones(op: Operacion):
     if x == z or y == z:
         return {"error": "El valor de Z ya es igual a X o Y no es necesario proceder."}, 400
 
+    if z == (x + y):
+        return {"error": "El valor de Z ya es igual a X + Y la solucion es llenar ambos baldes."}, 400
+
     # Operaciones y pasos
     steps = []
 
@@ -58,7 +61,7 @@ def operaciones(op: Operacion):
         steps.append({"X": x, "Y": 0, "step": "Fill X"})
         y = x
         steps.append({"X": 0, "Y": y, "step": "Transfer X to Y"})
-        while x < z:
+        while y < z:
             steps.append({"X": x, "Y": y, "step": "Fill X"})
             y += x
             steps.append({"X": 0, "Y": y, "step": "Transfer X to Y"})
