@@ -7,13 +7,13 @@ app = FastAPI()
 operations = []  # Lista para almacenar las operaciones
 
 
-class Operacion(BaseModel):
+class Operacion(BaseModel): # se asegura que los datos ingresados sean numeros enteros
     X: int
     Y: int
     Z: int
 
 
-def validar_entero_positivo(valor):
+def validar_entero_positivo(valor): # funcion para verificar que cada numero entero sea positivo y mayor a 0
     try:
         valor = int(valor)
         if valor <= 0:
@@ -23,7 +23,7 @@ def validar_entero_positivo(valor):
     return True
 
 
-@app.post("/api/operaciones")
+@app.post("/api/operaciones") # operacion Post para procesar los baldes X, Y y Z
 def operaciones(op: Operacion):
     x = op.X
     y = op.Y
@@ -70,9 +70,9 @@ def operaciones(op: Operacion):
 
     operations.append(steps)
 
-    return {"steps": steps}
+    return {"steps": steps}  # Llenado de la lista JSON con los pasos completados
 
 
-@app.get("/api/operaciones")
+@app.get("/api/operaciones")  # Solicitud y envio de la lista Json
 def obtener_operaciones():
     return {"operaciones": operations}
